@@ -1,0 +1,311 @@
+Data structures
+
+Arrays, linked Lists , Stacks , Queues, Trees ,Graphs
+
+Arrays
+
+- Normally data in a array is in same data type (not different data types)
+- Elements in array have indexes 
+- Suitable for storing fixed size set of elements.
+
+Lists:
+Dynamic Size: Lists can grow or shrink dynamically as elements are added or removed.
+Ordered Collection: Lists maintain the order of elements, allowing for sequential access.
+Random Access: Elements in a list can be accessed by their index, supporting efficient random access.
+Versatile Operations: Lists offer versatile operations for manipulation, insertion, deletion, and traversal of elements.
+Support for Iteration: Lists support iteration, enabling easy traversal and processing of elements.
+
+Linked list
+
+- Each element in linked list has a pointer it basically contains the address of the next element of the list .  (node = data + pointer)
+- linked list do not have indexes because they don't store elements right beside each other
+
+Singly Linked Lists: Elements are connected forward, each holding data and adress to the next element.
+Doubly Linked Lists: Elements are connected forward and backward, each holding data and adress to the next and previous elements.
+Circular Linked List: in CL last node points back to the first node, forming a circular structure. so its goes in a circular way.
+
+what are situations better to use link list?
+for large data set and continuously growing and if we had to continuously insert and delete elments its better to use linked lest . because if we used array
+
+arrays vs linked list
+
+- arrays have fixed size but linked list have dynamic size .
+- arrays store elements in a continuous block of memory but in linked list store elements in a sperate memory locations calls node 
+- array requires less  memory  as it stores only data. LinkedList Requires more memory due to storing data and two references (next and sometimes previous nodes).
+- for searching elements arrays can have like binary search but linked lists they must use linear search
+- arrays are faster when it comes to reading , linked lists are faster when it comes insert, deleting.(array slower for insertion and deletion because due to potential shifting of elements.)
+
+Hash Maps / hash tables /dictionaries
+
+- Hash maps has key-value pairs , no indexes
+- So HashMap's are unordered
+- Dynamic size 
+- Custom keys allowed for very quick searching
+ Ex : if we search a city in hash map we can search the city in relevant country key.
+
+Stacks
+
+- follows Last in-first out principle
+- have operations like push , pop, peek(view top)  time complexity O(1) so all of this are fast
+Use of stacks
+● Reversing a string 
+● Converting to binary
+● Infix to postfix
+● Evaluating a postfix expression
+
+what are the places you use stack in project or studies ?
+
+
+Queues
+
+- queues are like opposite of the stack 
+- follows the first in first out principle
+- have operations like Enqueue , Dequeue , front   time complexity O(1) so all of this are fast
+Queues are used in scenarios where the order of elements is crucial, such as in scheduling, breadth-first search, and implementing buffers.
+
+
+Trees
+
+- A tree is a nonlinear , hierarchical data structure 
+- tree is consists with nodes , so first node is a root and other nodes are children nodes.so it have parent-child structure.
+- Trees are widely used  for organizing hierarchical data, such as file systems,and organization charts, and representing hierarchical relationships in
+databases.
+- Types: Directed, undirected, weighted, unweighted.
+
+binary tree-  tree that parent node has only two children nodes 
+binary search tree -  is a tree that all left children of the nodes are less than the parent node and all right children are greater than the parent node .
+
+binary search tree is very fast when searching . 
+
+Graphs
+
+A graph is a non-linear data structure
+- graphs is a collection of nodes and edges. nodes are connecting by edges
+- trees are also a type of graphs
+-Graphs are versatile data structures used in various applications, including social networks, and transportation networks
+
+
+
+=======================================================================================================================
+
+Algorithms
+
+i have an array nearly sorted what is the best algorithm to sort this?
+insertion sort would be the best 
+
+   Sorting algorthms                       Searching algortihems           
+   
+    Bubble sort                             Binary search
+    Selection sort                          Breadth first search
+    insertion sort                          Depth first search  
+    Quick sort
+    Merge sort
+
+
+actually i can tell the steps how to do this ....
+
+Insertion sort
+
+-algorithm looks at the first element and compare with second elemnt if the second is less than first then swap the two nos then compare the elemnt in the second and third positons if the third is less than the second elemnt then swap the two if this elemnt is smaller than the first element then swap again so this pattern continues till the end.
+
+-insertion sort best when lists are sorted or smaller sizes. 
+-when it becomes larger and unordered it become problem
+
+Time Complexity:
+
+Best Case  :  O(n) (when the array is already sorted)
+Average Case:   O(n**2)
+Worst Case : O(n**2)
+
+pseudo code--
+
+for i in range(1, n):
+    key = array[i]            // 2nd elemnt
+    j = i - 1          // 1st elemnt
+    while (j >= 0 and key < array[j]):
+        array[j + 1] = array[j]
+        j -= 1
+    array[j + 1] = key
+
+
+Selection sort
+
+-so selection sort algorithm keeps track of the minimum value during each iteration and at the end of each iteration we swap the variables.(its like when searching the minimum value in an iteration ,we move minimum value to a tempory storage)
+
+-useful for small datasets
+
+Time Complexity: all O(n**2) 
+
+Best Case  :  O(n**2) 
+Average Case:   O(n**2)
+Worst Case : O(n**2)
+
+pseudo code
+
+for i in range(n):
+    min = i
+    for j in range(i+1, n):
+        if array[j] < array[min]:
+            min = j
+    array[i], array[min] = array[min], array[i]   //swaping
+
+Bubble sort
+
+-so in bubble sort it compares the two adjacent elements check to see they are in order if not elemnts are swapped then the next pair of adjacent elements are compared and we continue this pattern until all the elemnts are in order.
+-this goes again and again for every elemnt in array until it is sorted(looping not ike in selection sort go through every element in every time)
+
+-okay  for small datasets
+
+Time Complexity: (same as insertion sort)
+
+Best Case  :  O(n) (when the array is already sorted)
+Average Case:   O(n**2)
+Worst Case : O(n**2)
+
+pseudo code
+
+for i in range(n):
+    for j in range(0, n-i-1):
+        if array[j] > array[j+1]:
+            array[j], array[j+1] = array[j+1], array[j]
+
+Merge sort
+
+- merge sort is a divide & conquer algorithm  , a recursive algorithm(breaks up the problem to a smaller sub problmes and solve each sub problem)
+- we start by splitting the array in half and we continue to split the arrays until it become pairs. And at the same time each pair compare the first and second elemnt and get sorted . now we have sorted pairs. then it combines the two set of pairs and do the sorting same as before. this process continues until it makes the full array.
+
+Time Complexity: all O(nlog(n))
+
+Best Case  :  O(nlog(n)) 
+Average Case:  O(nLog(n))
+Worst Case : O(nlog(n))
+
+space complexity 
+     O(log(n))
+
+- so works well in large data sets , but need additional space for tempory arrays
+
+pseudo code
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+
+Quick sort (pivot element)
+
+- quick sort is a divide & conquer algorithm  , a recursive algorithm(breaks up the problem to a smaller sub problmes and solve each sub problem)
+
+- first pick a pivot no close to the median of the list as possible,and split the list into two lists, one where all the numbers are less than the pivot, and one where all the nos are greater than the pivot. we continue this process on each sublists until we reached our sorted list.
+
+Select Pivot: Choose a pivot element from the array. This can be done randomly, or by selecting the middle element, or any other method.
+Partitioning: Rearrange the elements in the array so that all elements less than the pivot are placed before it, and all elements greater than the pivot are placed after it.
+ then we split the array and do it again recursively . Once the sub-arrays are sorted, combine them to form the final sorted array.
+
+Time Complexity:                           n**2 >>> nlog(n)
+
+Best Case  :  O(nlog(n)) 
+Average Case:  O(nLog(n))
+Worst Case : O(n**2)
+
+
+space complexity 
+     O(log(n))
+
+Three notations used to compare and rank orders of growth of algorithms
+Big-oh, Big-Omega, Big- Theta
+
+big-o
+
+big-o is used describe how fast algorithm runs (time complexity), how much memory algorithm use(space complexity).
+Here is the order from smallest to largest growth rate 
+O(1) < O(log n) < O(n) < O(n(log n)) < O(n^2) < O(n^3) < O(2^n) < O(n!) 
+
+
+
+
+
+
+---------------------------------
+
+search algorithms
+
+linear search 
+
+it is the simplest searching algorithm so its check every element in array until desired element is found
+
+pseudo code
+function linearSearch(arr, target):
+    for index from 0 to length(arr) - 1:
+        if arr[index] == target:
+            return index
+    return -1  // Target not found
+
+- good for  searching elements in unsorted arrays(situation where we cant use binary search)
+- good for small datasets
+
+Time Complexity:
+
+Best Case  :  O(1) 
+Average Case: O(n)
+Worst Case : O(n)
+
+binary search 
+
+binary search use the divide and conquer mechanism. 
+so binary search can only use in sorted list.so in binary search if the value of the search key is less than the middle value of the list we cut the upper half otherwise we cut the lower half so this pattern goes recursively until we found the right element 
+
+pseudo code
+
+function binarySearch(arr, target):
+    low = 0
+    high = length(arr) - 1
+    
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        else if arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    
+    return -1  // Target not found
+
+
+time complexity ==  O(log(n))
+
+- good for searching in sorted list
+- good for large datasets
+
+
+depth first search
+
+divide and conquer and recursive algorithm.
+so in DFS it starts with the root node and goes far down in one branch as possible all the way to the end .once we hit the deepest point then it backtrack to the previous node and see is there are any unvisited nodes we can go through. so this patterns continues 
+
+used search in trees and graphs
+
+breadth first search 
+
+binary search trees insertion, search,deleteing
+
+

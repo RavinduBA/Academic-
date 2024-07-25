@@ -1,0 +1,96 @@
+java Threading
+
+
+- java threading enables multiple threads to run concurrently within a single program
+-  for creating threads we use Thread class and the Runnable interface.
+-  thread can be created by:
+     - Extending the Thread class and overriding its run() method.  (by inhertience)
+     - Implementing the Runnable interface and passing it to a Thread object.
+g Thread Class:
+
+Extending Thread Class----
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }}
+
+public class TestThread {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start(); // starts the thread
+    }}
+
+Implementing Runnable Interface----
+
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Thread is running");
+    }}
+
+public class TestRunnable {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyRunnable());
+        t1.start(); // starts the thread
+    }}
+
+multithreading
+
+-  multiple threads  run concurrently within a single program
+- without synchronization we cant say what thread is running
+
+class Task1 extends Thread {
+
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Hello" );
+            try {
+                Thread.sleep(500);             // Sleep for 500 milliseconds
+            } catch (Exception e) {}
+        }}}
+
+class Task2 extends Thread {
+
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("World" );
+            try {
+                Thread.sleep(500);             // Sleep for 500 milliseconds
+            } catch (Exception e) {}
+        }}}
+
+
+public class Main {
+    public static void main(String[] args) {
+       
+        Task1 task1 = new Task1();
+        Task2 task2 = new Task2();
+
+        // Start the threads
+        task1.start();
+        task2.start();
+    }
+}
+
+- so in above class task1 and task2 running concurrently(Actually one after 500 miliseconds  but not the way the task1 finshed then task2)
+
+
+Synchronization
+
+It ensures that only one thread can access the resource at a time, which helps to prevent thread interference and memory consistency errors.
+
+Why Synchronization is Needed
+When multiple threads try to access a shared resource simultaneously without  synchronization, it can lead to unpredictable results and errors. This is known as a race condition.
+
+
+
+
+
+- Examples of Java Threading Use Cases:
+
+Web Servers: Handling multiple client requests concurrently.
+GUIs       : Keeping the user interface responsive while performing background tasks like loading data.
+Gaming     : Running game logic, rendering, and user input in separate threads for smoother performance.
+
+
+

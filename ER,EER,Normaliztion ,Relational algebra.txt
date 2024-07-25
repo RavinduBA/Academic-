@@ -1,0 +1,329 @@
+
+Different types of databases
+
+Relational databases
+Non relational databases
+Object oriented databases
+Cloud databases
+
+Relational databases
+
+Relational databases store data in tables (or relations), where each table consists of rows and columns. They use SQL as query language.
+EX: MYSQL , PostgreSQL , Microsoft SQL server
+
+Non-Relational Databases
+
+Non-relational databases, often referred to as NoSQL databases, store data in a format other than traditional tables. They are designed for specific data models and have flexible schemas.
+EX: MongoDB, Redis, Cassandra, Neo4j
+
+difference between relational and non relational databases
+
+- relational databases has predefined schema but non relation has dynamic Shema.
+  (schema of a database describe structure of the data to be stored
+   SQL     - schema is defined by tables fields and relationships between them 
+   MONGODB - schema is like organizing data in to key value pairs
+   )
+- relational databases stores data in tables but NRDBMS stores data is stored in documents. (JSON)
+- in relational databases query language is SQL but in non relational it varies (EX: JSON queries)
+- in relational databases it use foreign keys to maintain relationships between tables. but non relational databases do not use foreign keys relationships are managed differently.
+- RDBMS supports join operations but NRDBMS doesn't support join operations
+- relation databases  Strong support for ACID properties . but NRDBMS May not fully support ACID properties, favoring BASE properties (Basically Available, Soft state, Eventually
+  consistent) .
+
+what are ACID properties ?
+
+Atomicity    -   transactions are either successful or failed
+Consistency -   says that data must meet all validation rules 
+Isolation    -   concurrency control
+Durability    -   
+
+DBMS languages
+
+DDL - data definition language
+DML - data manipulation language
+SDL - separate storage definition language
+VDL - View definition language 
+
+
+ER Model (entity relationship model)
+
+ER model describes data as entities, relationships and attributes
+entities - real world object that have attributes
+
+disadvantage -  doesn't support the specialization/ generalization abstractions
+
+EER Model 
+
+includes all modeling concepts of basic ER module 
+Additional concepts: subclasses/superclasses ,specialization/generalization, categories (UNION types),attribute inheritance.
+some object oriented concepts included (inheritance)
+
+Subclasses and Superclasses
+
+-SO entity type can divide in to sub entities
+Ex: EMPLOYEE may be further grouped into SECRETARY, ENGINEER, MANAGER, TECHNICIAN, SALARIED EMPLOYEE, HOURLY EMPLOYEE, . . .
+
+subclass entitie inherits all attributes of the superclass entitie It also inherits all relationship
+
+
+Specialization
+
+- specialization is a process of defining a set of subclasses of a entity type.
+- subclasses will contaion attributes also
+
+Example: SECRETARY, ENGINEER, TECHNICIAN is a specialization of EMPLOYEE based upon job type.
+
+UML vs. (E)ER
+
+UML                     (E)ER
+Class                  Entity type
+Object                  Entity
+Association             Relationship type
+Binary association       Binary Relationship type
+Link attribute            Relationship attribute
+Multiplicities           Relationship constraints
+Reflexive association      Recursive relationship
+
+
+Relational Model Concepts
+
+The Schema of a Relation: R (A1, A2, . . . , An)
+Relation schema R is defined over attributes A1, A2, . . . , An
+
+ex: CUSTOMER (CustID, CustName, Address, Phone)
+
+A tuple is an ordered set of values
+Each row in the CUSTOMER table may be referred to as a tuple in the table and would consist of four values.
+<632895, "John Smith", "101 Main St. Atlanta, GA30332", "(404)894-2000">
+
+Informal Terms        Formal Terms
+Table                  Relation
+Column                 Attribute/Domain
+Row                    Tuple
+Values in a column     Domain
+Table Definition       Schema of a Relation
+Populated Table        Extension
+
+Type of keys in databases
+
+Primary Key  - A primary key is a column or a set of columns in a table that have unique row in  that table.
+
+Foreign Key - A foreign key is a column or a set of columns in one table that links to the primary key of another table.
+
+Composite Key -  A primary key made up of two or more columns.
+
+Unique key - A unique constraint ensures that all values in a column (or a set of columns) are unique. Unlike primary keys, a table can have multiple unique constraints, and unique columns can contain NULL values
+
+-Tuples in the referencing relation R1 have attributes FK (called foreign key attributes) that reference the primary key attributes PK of the referenced relation R2.
+-FK in R1 should not be a part of its own primary key
+
+Do we need to know about ER to relational  mapping ,EER to relational mapping ?  yes
+ER to relational mapping ( 7 steps, watch PDF)  (in every relation we mainly create the foreign key )
+EER to relational mapping ()
+
+
+Functional Dependencies
+
+if  we take two attributes like X and Y they are in functional dependence if
+X → Y holds if whenever two tuples have the same value for X, they must have the same value for Y .(bascically this happens between key attribute and non key attribute)
+For any two tuples t1 and t2 in any relation instance r(R): If t1[X] = t2[X], then t1[Y ] = t2[Y ]
+X → Y  = this means Y depends on X
+
+EX:
+social security number determines employee name
+SSN → ENAME
+project number determines project name and location
+PNUMBER → {PNAME, PLOCATION}
+employee ssn and project number determines the hours per week that the employee works on the project
+{SSN, PNUMBER} → HOURS
+
+
+Normalization
+
+Normalization in a database is the process of organizing data to minimize redundancy and improve data integrity.
+Normalization have several normal forms like first normal form.....
+
+what is a data integrity
+Data integrity refers to the accuracy, consistency, and reliability of data throughout its lifecycle
+
+1NF (First Normal Form)
+2NF (Second Normal Form)
+3NF (Third Normal Form)
+BCNF (Boyce-Codd Normal Form)
+4NF (Forth Normal Form)
+5NF (Fifth Normal Form)S
+
+why we do normalization in tables ?
+
+1. to eliminate insertion, deletion, and update anomalies
+2. Eliminate data Redundancy -  Reduces data duplication, saving storage space
+3. Ensure Data Integrity-  Maintains data accuracy and consistency by organizing data into logical units
+4. Improve Data Organization
+5. to make more scalable - scale the database by organizing data into smaller, more manageable tables.
+
+insertion anomaly 
+
+insertion anomaly occurs when certain attributes cannot be inserted into the database without the presence of other attributes
+ ex:If a new course needs to be added but there are no students enrolled in it yet, we cannot insert the course details alone because we need to provide a StudentID and StudentName.
+
+Update Anomaly
+
+If Alice's name changes (e.g., from "Alice" to "Alicia"), we must update it in every row where Alice is referenced. If we forget to update one row, the database will have inconsistent data.
+
+Deletion Anomaly
+
+A deletion anomaly occurs when the deletion of data leads to unintended loss of additional data.
+EX: If Alice drops all her courses and we delete her records from the table, we also lose the information about the courses she was enrolled in. For example, deleting the rows for StudentID 1 also removes all records of the courses Math and Science that Alice was enrolled in, if no other students are taking those courses.
+
+
+First Normal Form
+
+to be a relation in 1NF there cannot be  composite attributes, multivalued attributes, and nested relations in a relation.
+Each attribute contains atomic values.(value cannot be divide further)
+
+when check something in 1NF check there is any composite attributes, multivalued attributes, if they exixts then reweite the attributes that contains atomic values(we might have to add columns in the process)
+
+StudentID     Name	        Courses
+1	      Alice	        CS101, MATH101, ENG202
+2	      Bob	        CS101, ENG202
+3	      Charlie	        MATH101, PHYS303
+
+converted one
+StudentID	Name	CourseID
+1	       Alice	CS101
+1	       Alice	MATH101
+1	       Alice	ENG202
+2	       Bob	CS101
+2	       Bob	ENG202
+3	       Charlie	MATH101
+3	       Charlie	PHYS303
+
+NOTE
+----
+if we take one column or several column  as primary key that column cannot contain same valued rows . dont confuse this with functional  dependencies.
+----
+
+Second Normal Form
+
+A relation schema R is in second normal form (2NF) if every non-prime attribute A in R is fully functionally dependent on the primary key.
+we have to remove partial dependencies (functionally dependent on only a part of the primary key)in primary key.
+
+when you check some table in 2NF first it must be 1NF then identify the primary key then check is there any partial dependencies .if they have it then split in to tables to make Fully functional dependent on primary key(new tables primary keys will be change).
+
+Full functional dependency - a FD Y → Z where removal of any attribute from Y means the FD does not hold any more.
+so first realtion must be in 1NF to be 2NF.
+
+Examples:
+-{SSN, PNUMBER} → HOURS is a full FD since neither SSN→ HOURS nor PNUMBER → HOURS hold
+-{SSN, PNUMBER} → ENAME is not a full FD (it is called apartial dependency ) since SSN → ENAME also holds
+
+
+Third Normal Form
+
+so to be in 3NF it first must be in 2NF and then  there must be no transitive dependecies on the table.
+teancitive dependenicies means (two non prime attributes dependecie)
+so all attributes must be directly dependent on the primary key
+a FD X → Y that can be derived from two FDs X → Z and Z → Y
+
+Examples:
+-SSN → DMGRSSN is a transitive FD since SSN →DNUMBER and DNUMBER → DMGRSSN hold
+-SSN → ENAME is non-transitive since there is no set of attributes X where SSN → X and X → ENAME
+
+Every 2NF relation is in 1NF
+Every 3NF relation is in 2NF
+Every BCNF relation is in 3NF
+
+
+
+Relational Algebra
+
+Relational algebra is a query language that allows us to retrieve data from DBs.
+It consists of a set of operations that take one or two relations as input and produce a new relation as output.
+
+questions about relational algebra query writing
+https://www.youtube.com/watch?v=ipMbQhppYhs
+https://www.youtube.com/watch?v=Dgq01JAWw4Y  (first two or three problems)
+
+
+
+Join operation
+
+Join operation use to combine rows of two or more tables , based on a related column between them .
+Inner ,full ,left ,right join
+
+Inner join - inner join returns records which have matching values in both tables
+ 
+Full join  - full join returns records which either have match in left or right tables
+
+left join  - left join returns records of the left table and also the records that satisfy the condition of the right table.
+
+right join  - right join returns the records of the right table and also the records that satisfy the condition in left table 
+
+
+Join  - (library management system)
+  
+1. user wants to see the books they have borrowed
+
+-  i used JOIN operation to combine data from the users, books, and transactions tables.
+SELECT users.user_id, users.username, books.book_id, books.title, transactions.borrow_date
+FROM users
+JOIN transactions ON users.user_id = transactions.user_id
+JOIN books ON transactions.book_id = books.book_id
+WHERE users.user_id = ?;
+
+2. display book search results with additional information,
+
+i used join the books table with other related tables, such as authors or categories.
+SELECT books.book_id, books.title, authors.author_name, categories.category_name
+FROM books
+JOIN authors ON books.author_id = authors.author_id
+JOIN categories ON books.category_id = categories.category_id
+WHERE books.title LIKE ? OR authors.author_name LIKE ?;
+
+
+
+
+what do you understand by query optimization?
+
+Query optimization is the process of improving the performance and efficiency of database querie.
+
+advantage of quiery optimization
+1. the output is provided faster
+2. large no of queries can be excuted in  less time
+3. reduce the time and space complexity 
+
+
+How would you optimize a database query?
+
+Optimizing a database query involves improving its performance by reducing the time it takes to execute and minimizing resource consumption. 
+
+1. Optimize JOINs:
+Use appropriate JOIN types based on the relationship between tables.(INNER JOIN, LEFT JOIN, etc.) 
+Minimize the number of JOIN operations by selecting only necessary columns and rows
+
+2. Limit Returned Data:
+Retrieve only the necessary columns instead of using SELECT *.
+Use the LIMIT clause to restrict the number of rows returned, especially for pagination.
+
+3.Cache Query Results:
+Implement caching mechanisms to store frequently accessed data or query results.
+
+
+what is indexes ? difference between clustered and non-clustered index?
+
+indexes are data structures that increase the speed of data retrieval operations on tables. 
+so it uses more storage space to maintain extra copies of data by additional writes.
+
+what do you understand by cursor ? mention different types of cursers
+
+cursor is databse object that helps in manipulating data 
+-implicit cursor
+-explicit cursor
+
+watch the lab sheets (around 5 ) about MySQL indexing , query optimization and intro for mongodb
+
+
+
+I want to join Rootcode Labs because of their strong reputation for excellence in software product engineering. The company's commitment to developing cutting-edge solutions aligns with my passion for technology and problem-solving. The opportunity to work with a team of skilled professionals and contribute to impactful projects is highly appealing to me.
+
+

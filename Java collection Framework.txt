@@ -1,0 +1,521 @@
+
+what are the main two data types in java
+
+1. Primitive Data Types : These are the basic data types provided by Java.
+ byte: short: int: long: float: double: char: boolean: 
+
+2. Reference Data Types: These are created using defined classes or interfaces.
+ Objects: Instances of classes.
+ Arrays
+ Strings
+ Interfaces
+
+mutable ones and non mutable ones
+
+1. Mutable Types - can have their state modified
+  Primitive Data Types
+  Mutable Classes:ArrayList, HashMap
+
+2. Immutable Types - cannot have their state changed after they are created
+   Immutable Classes: String , 
+   Wrapper Classes for primitive types: Integer, Float, Double
+  
+
+
+Generics
+
+Generics allows to write code that can operate on different types.
+Generics can be used in methods ,classes and interfaces
+
+Benefits of Generics
+
+Code Reusability - you can write a single genric method or class and use it with many types
+Performance      - Generics eliminate the need for typecasting and and boxing/unboxing
+Type Safety      - Generics ensure that you can only use the specified types so its reduce the runtime error
+
+generics cannot be used directly with primitive data types (like int, char, boolean, etc.). instead you have to wrapper classes .
+Java provides wrapper classes for all the primitive data types:
+
+int -> Integer
+char -> Character
+boolean -> Boolean
+byte -> Byte
+short -> Short
+long -> Long
+float -> Float
+double -> Double
+
+
+EX:
+Generics in method
+
+public class Main {
+
+    // Generic method with two type parameters T and U
+    public static <T, U>  printKeyValue(T key, U value) {
+        System.out.println("Key: " + key + ", Value: " + value);
+   
+    return key;
+
+    }
+
+    public static void main(String[] args) {
+        // Using the generic method with different types
+        printKeyValue(1, "One");         // Integer and String   and key
+        printKeyValue("Name", 25);       // String and Integer
+        printKeyValue(3.14, true);       // Double and Boolean
+        printKeyValue("Pi", 3.14);       // String and Double
+    }
+}
+
+so after we define a genric it is used as a normal data type(int,string,char)
+
+Generics in classes
+
+public class Box<T> {
+    private T value;
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+    public T getValue() {
+        return value;
+    }
+
+    public static void main(String[] args) {
+
+        // Using Integer instead of int
+        Box<Integer> integerBox = new Box<>();
+        integerBox.setValue(123);
+        System.out.println(integerBox.getValue()); // Outputs: 123
+
+        // Using Double instead of double
+        Box<Double> doubleBox = new Box<>();
+        doubleBox.setValue(45.67);
+        System.out.println(doubleBox.getValue()); // Outputs: 45.67
+    }}
+
+
+Wildcards in Generics
+
+Wildcards (?) are used in generics to represent an unknown type. 
+There are three types of wildcards:
+
+= Unbounded Wildcards: <?> - Represents any type.
+= Bounded Wildcards:
+Upper Bounded Wildcards: <? extends T> - Represents any type that is a subclass of T.
+Lower Bounded Wildcards: <? super T> - Represents any type that is a superclass of T.
+
+EX:
+public static void printList(List<?> list) {
+    for (Object elem : list) {
+        System.out.print(elem + " ");
+    }
+    System.out.println();
+}
+
+public static void main(String[] args) {
+    List<Integer> intList = Arrays.asList(1, 2, 3);
+    List<String> strList = Arrays.asList("A", "B", "C");
+
+    printList(intList); // Outputs: 1 2 3
+    printList(strList); // Outputs: A B C
+}
+
+
+
+
+NOTE_____
+
+to implement a list in java 
+
+remember list and arraylist is mostly same when implementing but array and arraylist is two different things
+
+import java.util.ArrayList;
+
+  List<String> fruits = new ArrayList<>();
+  ArrayList list1 = new ArrayList();  
+
+   // Add elements of different types (be careful, this can lead to runtime errors!)
+    list1.add("Hello");
+    list1.add(10);
+    list1.add(true);
+
+    // Access elements using get() (remember casting is needed!)
+    String message = (String) list1.get(0);  // Cast to String
+    int number = (Integer) list1.get(1);     // Cast to Integer
+    boolean flag = (Boolean) list1.get(2);    // Cast to Boolean
+
+
+ for (int i = 0; i < list1.size(); i++) {
+      Object item = list1.get(i);
+      System.out.println(item);  // Prints the object without knowing its type
+    }
+
+____
+
+Auto boxing and Auto-Unboxing
+
+auto boxing is a way to wrap primitive value into an object 
+Auto unboxing is unwrap object to get primitive value
+
+EX: Integer intObj = 5566;    // autobox from int to Integer
+    int i = intObj;           // auto unbox from Integer to int
+
+    Double  doubleObj = 23.2  //autobox from double to Double
+    double d = doubleObj      //auto unbox from Double to double
+
+
+Collection framework
+
+collection and collections is two things
+
+collection interface = 
+
+-Collection is an interface in the java.util package. root interface in the Java Collections Framework
+-it defines the basic operations for sub interfaces ( List, Set, and Queue.)
+-methods defined in the Collection interface are add(), get(), remove(),iterator(), size(), contains(), 
+-Collection can only contain objects, not primitives(int,double), (so premitives are wrapped in to objects using wrapper classes such as Integer and Double  )
+
+collections utility class =
+
+-Collections is a utility class in the java.util package.
+- Collections class have static methods like sort(), shuffle(), reverse(), binarySearch(), max(), min(), synchronizedList(), 
+
+
+sub interfaces of collection interface
+
+List<E>
+
+-dynamic size
+-allows indexed access
+-can contain duplicate items ,cannot null elements
+-implementation of List interface = ArrayList ,LinkedList ,Vector, Stack
+
+1) ArrayList  = dynamic size , non synchronous 
+2) LinkedList =  non synchronous , linkedlist in java is doubly linked list.
+                 array list is more efficient when searching but linked list is faster when it comes to insertion and deletion(O(1))
+3) Vector     =  synchronized , maintains insertion order  
+4) Stack      = implementation of vector
+
+difference between array and arraylist ?
+
+- arrays has fixed size but array list is more dynamic sized one
+- arrays can hold primitives and objects but arraylist can hold only objects.(primitive types like int, char, Boolean  and   objects like String, Integer, CustomClass )
+- arrays use contiguous block of memory but arraylist use dynamic array internally 
+- array initialization =	int[] arr = new int[5];   
+- arrayList initialization =  ArrayList<Integer> list = new ArrayList<>();
+
+difference between LinkedList and arraylist ?
+
+-in arraylist there is indexing for elements but in linkedlist there is no indexing instead it have pointer for every element
+-in arraylist insertion and deletion are slower compare to linkedList but searching is faster
+
+
+Set<E>
+
+-can't contain duplicate items, can null elements
+-implementation of set interface= Hashset, LinkedHashSet ,TreeSet, SortedSet 
+
+1) HashSet = store elements in hash table , maintain the order, hashed via hashcode
+
+EX:  Set<String> hashSet = new HashSet<>();
+
+        // Adding elements to the HashSet
+        hashSet.add("Apple");
+        hashSet.add("Banana");
+        hashSet.add("Cherry");
+        hashSet.add("Apple"); // Duplicate element, will not be added
+
+2) LinkedHashSet  = store elements in linked-list hash table . better for efficnecey inserting and deleting. implementation of HashSet, The element are hashed via the hashCode()
+
+EX:   Set<String> linkedHashSet = new LinkedHashSet<>();
+        // Adding elements to the LinkedHashSet
+        linkedHashSet.add("Apple");
+        linkedHashSet.add("Banana");
+        linkedHashSet.add("Cherry");
+        linkedHashSet.add("Apple"); // Duplicate element, will not be added
+
+3) TreeSet = maintains the ascending order,Stores the elements in a red-black tree data structure, efficient in search
+
+
+Queue<E>
+
+-follows first in first out principle
+-beside basic Collection operations Queue provides additional insertion , extraction operations
+-implementation of queues = Deque, PriorrityQueue, ArrayDeque
+
+1) priority queue = queue with priority associated with each element .  so high priority element is served before the low priority element irrespective of their insertion order 
+
+2) Deque = double ended queue . so elements can be added or removed form either end .
+
+
+Map<K,V> interface
+
+- Map is a collection of key-value pairs
+- Map is a part of the Java Collections Framework, but it does not extend the Collection interface.
+- Duplicate keys are not allowed but duplicate values are allowed
+- Implementations of Map = HashMaps, Hashtable, TreeMap
+- Maps don't have methods like add, remove because map isn't a implementation of collection interface
+
+1) HashMap = maintains on order, not synchronized
+
+2) TreeMap = maintains Ascending order  
+
+
+EX:    Map<String, Integer> map = new HashMap<>();
+
+        // Adding key-value pairs to the map
+        map.put("Apple", 10);
+        map.put("Banana", 20);
+        map.put("Cherry", 30);
+
+        // Displaying the map
+        System.out.println("Initial map: " + map);
+
+        // Accessing a value by key
+        Integer value = map.get("Apple");
+        System.out.println("Value for 'Apple': " + value);
+
+
+Why map dosent extend the collection interface ?
+
+Map follows key-value pair structure and collection interface is a collection of objects that stored in a structural way.
+so Map dosent support method like add(e) and collection interface  dosent support method like put(K,V).
+
+
+important methods 
+
+add() = add a single element to the collection.
+EX:  set. Add("Cherry");
+
+get() 
+
+addAll()  = add all elements from a one collection to another collection (union operation)
+Ex: // Adding all elements from list to set1
+        set1.addAll(list);
+
+retainAll() =  retain only the elements in the collection that are contained in the specified collection
+EX: // Retaining only elements in set1 that are also in list
+        set1.retainAll(list);
+
+public Iterator< E > iterator(): = returns an iterator that steps through elements in the collection
+
+
+ArrayList
+
+ArrayList<E> is a implementation of List<E> interface
+
+List<E>   is an interface in Java that provides a collection of methods for working with lists, such as adding, removing, and accessing elements.
+ArrayList<E> is a class implementation of the List<E> interface. This means it uses an array internally to store the elements, and the size of the array can grow as needed.
+
+Arraylist can be implement in two ways
+
+// Using specific implementation type
+1) ArrayList<String> cofeeList = new ArrayList<>();
+
+// Using interface type    (mostly use case)    
+2) List<String> cofeeList = new ArrayList<>();            (Upcasting)
+
+
+1)cofeeList is of type ArrayList<String>, which is  implementation of the List interface.
+you can use all methods in arraylist class addition to List interfaces class
+
+2)cofeeList is of type List<String>, which is an interface.
+ you can use all methods in List interface but not the specified methods in ArrayList 
+
+EX:
+// Using specific implementation type
+ArrayList<String> arrayList = new ArrayList<>();
+arrayList.add("Apple");
+arrayList.add("Banana");
+System.out.println(arrayList.size());
+arrayList.trimToSize(); // Method specific to ArrayList
+
+// Using interface type
+List<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+System.out.println(list.size());
+// list.trimToSize(); // This line would cause a compile-time error because trimToSize() is not in the List interface
+
+
+traverse through a List in Java
+
+1)Using a For Loop
+
+List<String> coffeeList = new ArrayList<>();
+coffeeList.add("Espresso");
+coffeeList.add("Latte");
+coffeeList.add("Cappuccino");
+
+for (int i = 0; i < coffeeList.size(); i++) {
+    System.out.println(coffeeList.get(i));
+}
+
+2)Using For-Each Loop
+
+for (String coffee : coffeeList) {
+    System.out.println(coffee);
+}
+
+3)Using an Iterator
+
+Iterator<String> iterator = coffeeList.iterator();
+while (iterator.hasNext()) {
+    String coffee = iterator.next();
+    System.out.println(coffee);
+}
+
+
+
+what is difference between Set and Map ?
+set contains only values but map have key-value pairs. (van say implantation of collection interface and map isn't a implementation)
+
+what is the difference between hashSet and Hashmaps?
+hashset contains only values but Hashmap have key-value pairs. Hashset can be iterated and hashmap need to convert to Set to be itereated .
+
+what is difference between hashmap and treeMap ?
+order ascending and not
+
+what hashcode() method do?
+hashcode() method returns a hashcode value (number)of a object.
+
+hashcode - Is an integer value that is associated with each object when hashing. Its used in hashing in hash tables, which are used by data structures like HashMap,HashedSet,LinkedHashset
+if two keys are same method returns the same number.
+
+Is it possible for two unequal objects to have the same hashcode?
+Yes, two unequal objects can have same hashcode that's why collision happen in a hashmap. The equal hashcode contract only says that two equal objects must have the same  hashcode (no different hash codes) it doesn't say anything about the unequal object.
+
+what equal() method do?
+equals() method is used to check if two objects are equal or not.
+If two objects are equal (equals() returns true), they must have the same hash code.
+
+what is a couple of ways that you could sort a collection?
+you can use the sorted collection like TreeSet , TreeMap or you can sort using the orderd collection like a list and using Collections.sort method
+
+
+
+java exception handling and assertion
+
+what is exception ?  unwanted event that interrupts the normal flow of the program
+EX: when you expect the user to enter integer but receive a string it will cause a runtime error
+
+so if we didn't  handle the exceptions properly program can be terminate so the rest of the program will not be compiled
+EX: network connections, database connections will remain opened or remain inconsistent state  
+
+so there is 5 keywords  in ES = try ,catch, finally, throw ,throws
+
+basic structure
+
+        try {    
+            
+            // try block include main logic, Code that may throw an exception
+          
+        } catch (Exception e) {
+
+            //catch block include  Code to handle the exception
+
+        } finally {
+            //finally block clean up the code ,Code that will run no matter what
+        }
+
+Common Exception Types in Java
+
+Exception: Base class for all exceptions.
+RuntimeException: Base class for unchecked exceptions.
+ArithmeticException: Thrown when an arithmetic operation fails, such as division by zero.
+NullPointerException: Thrown when attempting to use null where an object is required.
+
+throw keyword
+
+throw keyword use to manually cause the exception.
+
+throw new ExceptionType("Error message");
+
+EX:  public class ThrowExample {
+    public static void main(String[] args) {
+        try {
+            validateAge(15); // This will cause an exception
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void validateAge(int age) {
+        if (age < 18) {
+            throw new IllegalArgumentException("Age must be 18 or older.");
+        } else {
+            System.out.println("Age is valid.");
+        }
+    }
+}
+
+throws keyword
+
+Used in method signatures to declare that a method might throw certain exceptions.
+
+public void methodName() throws ExceptionType {
+    // Method code
+}
+
+EX: 
+
+
+create examples , how you used exception handling and java collection framework in projects? ()
+
+
+
+
+
+
+final, finally, and finalize keyword
+
+
+final 
+
+in java Final keyword can be used in variables , methods and classes
+
+variables - when variable is set to final it cant be modified
+method    - when method is set to final it cannot be overridden by subclass
+class     - when class is set to final it cannot be subclassed
+
+EX:
+final int MAX_VALUE = 100;
+
+public final void display() {
+    System.out.println("This is a final method.");
+}
+public final class Constants {
+    // class body
+}
+
+
+finally
+
+finally block is used in exception handling. after try and catch block we set finally keyword . normaly finally block is used to cleanup the code it runs no matter what executes try or catch.
+
+
+finalize
+
+The finalize method is called by the garbage collector when it determines that there are no more references to the object. It is used to perform cleanup operations before the object is permanently discarded. This method is part of the Object class and can be overridden to dispose of system resources or perform other cleanup tasks.
+
+protected void finalize() throws Throwable {
+    try {
+        // Cleanup code
+    } finally {
+        super.finalize();
+    }
+}
+s
+
+
+
+
+
+
+
+
+
+
+

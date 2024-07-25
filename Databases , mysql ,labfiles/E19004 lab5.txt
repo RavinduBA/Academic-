@@ -1,0 +1,179 @@
+
+CREATE TABLE MOVIE(
+	Movie_ID int PRIMARY KEY AUTO_INCREMENT,
+	Title varchar(255),
+	Year int,
+	Director varchar(255)
+	);
+	
+ALTER TABLE MOVIE AUTO_INCREMENT=101;
+	
+CREATE TABLE REVIEWER(
+    Reviewer_ID int PRIMARY KEY AUTO_INCREMENT,
+    Reviewer_Name varchar(255)
+    );
+	
+ALTER TABLE REVIEWER AUTO_INCREMENT=201;
+	
+CREATE TABLE RATING(
+    Reviewer_ID int,
+    Movie_ID int,
+    Stars int,
+    Rating_Date DATE,
+	
+	CONSTRAINT fk_reviewerID FOREIGN KEY (Reviewer_ID) 
+	REFERENCES REVIEWER(Reviewer_ID)
+	ON UPDATE NO ACTION
+	ON DELETE SET NULL,
+	
+	CONSTRAINT fk_movieID FOREIGN KEY (Movie_ID) 
+	REFERENCES MOVIE(Movie_ID)
+	ON UPDATE NO ACTION
+	ON DELETE CASCADE
+    );
+	
+INSERT INTO movie (title, year, director) VALUES 
+    ('Gone with the Wind', 1939, 'Victor Fleming'),
+    ('Star Wars', 1977, 'George Lucas'),
+    ('The Sound of Music', 1965, 'Robert Wise'),
+    ('E.T.', 1982, 'Steven Spielberg'),
+    ('Titanic', 1997, 'James Cameron'),
+    ('Snow White', 1937, NULL),
+    ('Avatar', 2009, 'James Cameron'),
+    ('Raiders of the Lost Ark', 1981, 'Steven Spielberg');
+	
+INSERT INTO rating (reviewer_id, movie_id, stars, rating_date) VALUES 
+    (201, 101, 2, '2011-01-22'),
+    (201, 101, 4, '2011-01-27'),
+    (202, 106, 4, null),
+    (203, 103, 2, '2011-01-20'),
+    (203, 108, 4, '2011-01-12'),
+    (203, 108, 2, '2011-01-30'),
+    (204, 101, 3, '2011-01-09'),
+    (205, 103, 3, '2011-01-27'),
+    (205, 104, 2, '2011-01-22'),
+    (205, 108, 4, null),
+    (206, 107, 3, '2011-01-15'),
+    (206, 106, 5, '2011-01-19'),
+    (207, 107, 5, '2011-01-20'),
+    (208, 104, 3, '2011-01-02');
+
+
+INSERT INTO reviewer (reviewer_name) VALUES 
+	('Sarah Martinez'),
+    ('Daniel Lewis'),
+    ('Brittany Harris'),
+    ('Mike Anderson'),
+    ('Chris Jackson'),
+    ('Elizabeth Thomas'),
+    ('James Cameron'),
+    ('Ashle White');
+	
+
+
+NOTE
+
+" SELECT "      = works as a project operator  , writes firstly in the query after this we set FROM
+" WHERE "       = works as a select operator  , after the tables name we write this
+" FROM "        = after this we write the tables name or the join of two tables
+" INNER JOIN "  = we write two tables from left and right to this , after this we write the  condition for join operation (mostly we match the same ID attributes of two tables )
+
+even 3 tables can combine with join operation but only 2 at a time
+	
+SELECT * from MOVIE;
+
+SELECT * from MOVIE 
+WHERE Director = "James Cameron";
+
+SELECT * from MOVIE 
+WHERE Director = "James Cameron" AND year >= 2000;
+
+SELECT Stars from RATING;
+
+SELECT DISTINCT Stars FROM RATING;
+
+SELECT Movie_id, Director FROM MOVIE;
+
+SELECT Movie_id, Title, Year, Director FROM MOVIE
+WHERE Director = "Steven Spielberg";
+
+SELECT * FROM MOVIE INNER JOIN RATING;
+
+
+
+10. SELECT MOVIE.Movie_ID, MOVIE.Title, RATING.Reviewer_ID, RATING.Stars
+FROM MOVIE INNER JOIN RATING 
+ON MOVIE.Movie_ID=RATING.Movie_ID;
+
+11. SELECT MOVIE.Movie_ID, MOVIE.Title, RATING.Reviewer_ID, RATING.Stars
+FROM MOVIE INNER JOIN RATING 
+ON MOVIE.Movie_ID=RATING.Movie_ID
+WHERE RATING.Stars <=3;
+
+12. SELECT MOVIE.Movie_ID, MOVIE.Title, RATING.Reviewer_ID, RATING.Stars
+FROM MOVIE INNER JOIN RATING 
+ON MOVIE.Movie_ID=RATING.Movie_ID
+WHERE RATING.Stars BETWEEN 2 AND 4;
+
+13. SELECT Reviewer_ID, Movie_ID FROM RATING;
+
+14. SELECT Reviewer_ID, Movie_ID FROM RATING GROUP BY Reviewer_id;
+
+15. SELECT MOVIE.Movie_ID, MOVIE.Title, REVIEWER.Reviewer_ID, REVIEWER.Reviewer_Name, RATING.Stars
+FROM MOVIE
+INNER JOIN RATING ON MOVIE.Movie_ID = RATING.Movie_ID
+INNER JOIN REVIEWER ON RATING.Reviewer_ID =  REVIEWER.Reviewer_ID;
+
+16. SELECT MOVIE.Movie_ID, MOVIE.Title, REVIEWER.Reviewer_ID, REVIEWER.Reviewer_Name, RATING.Stars
+FROM MOVIE
+INNER JOIN RATING ON MOVIE.Movie_ID = RATING.Movie_ID
+INNER JOIN REVIEWER ON RATING.Reviewer_ID =  REVIEWER.Reviewer_ID
+WHERE RATING.Stars = 5;
+
+17. SELECT MOVIE.Title, REVIEWER.Reviewer_Name, RATING.Stars
+FROM MOVIE
+INNER JOIN RATING ON MOVIE.Movie_ID = RATING.Movie_ID
+INNER JOIN REVIEWER ON RATING.Reviewer_ID =  REVIEWER.Reviewer_ID
+WHERE RATING.Rating_Date IS NULL;
+
+__Union operator
+
+Select all the movie director names and reviewer names into one column. Do not include 
+null values.
+18. SELECT Director
+FROM MOVIE WHERE Director IS NOT NULL
+UNION
+SELECT Reviewer_Name AS names
+FROM REVIEWER WHERE Reviewer_Name IS NOT NULL;
+
+19. SELECT * FROM REVIEWER
+WHERE Reviewer_Name LIKE "%Martinez";
+
+20. SELECT * FROM RATING
+WHERE SUBSTRING(Rating_Date, 9, 2) < '10';
+
+21. SELECT * FROM RATING
+WHERE DAY(Rating_Date) < 10;
+
+22. SELECT Movie_ID, Reviewer_ID, Stars+1 AS new_stars, Rating_Date
+FROM RATING
+WHERE Reviewer_ID = (SELECT Reviewer_ID FROM REVIEWER WHERE Reviewer_Name = 'Brittany Harris');
+
+23. SELECT MOVIE.Title, REVIEWER.Reviewer_Name, RATING.Stars
+FROM MOVIE
+INNER JOIN RATING ON RATING.Movie_ID = MOVIE.Movie_ID
+INNER JOIN REVIEWER ON REVIEWER.Reviewer_ID = RATING.Reviewer_ID
+ORDER BY MOVIE.Title ASC;
+
+24. SELECT MOVIE.Title, RATING.Stars, RATING.Rating_Date 
+FROM MOVIE
+INNER JOIN RATING ON RATING.Movie_ID = MOVIE.Movie_ID
+ORDER BY MOVIE.Title ASC, RATING.Stars DESC, RATING.Rating_Date DESC;
+
+25. SELECT *
+FROM MOVIE
+WHERE Director IN (
+    SELECT Reviewer_Name
+    FROM REVIEWER
+    WHERE Reviewer_Name = Director
+);

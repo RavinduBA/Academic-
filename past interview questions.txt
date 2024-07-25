@@ -1,0 +1,232 @@
+Experience with Database/JavaScript
+Questions on PHP/C/CSS
+Java Collections:
+
+
+look on http method like get,post ,delete
+dynamic programming / binary search trees inserting deleting
+design patterns
+
+dont sure these questions are for carrier fair or for us
+Java Servlets, platform independence
+
+
+
+How to send a request to a web server?
+
+using browser - using browser it simple when we enter url in browser its  sends an HTTP GET request to the server and it responds with a web page 
+we can use requests library in python to send GET,POST requests
+
+
+Explain about virtual memory
+
+Virtual memory is a memory management technique used by operating systems.When your computer runs out of physical memory (RAM), it moves some data from RAM to your hard drive temporarily.This frees up space in RAM for other programs to use.When the data is needed again, it's moved back from the hard drive to RAM.
+
+pointers
+
+Pointers are variables that store memory addresses as their values. They are fundamental to programming languages like C, C++, and others, and they provide a way to directly interact with memory locations.
+
+Memory Address: Every variable in a computer program is stored in a specific memory location. Pointers store the memory address of a variable instead of its value.
+
+
+Differences between array and array-list
+
+Feature 	   Arrays	                           ArrayLists
+Size	           Fixed size       	                Dynamic size
+Data Types	  Primitives and objects	         Only objects (can store primitives using wrapper classes)
+Syntax	          Declared using square brackets	Implemented as a class in Java Collections Framework
+Direct Access	   Yes, by index	                       Yes, by index
+Memory Allocation   Contiguous memory	           May require more memory overhead due to resizing
+
+Code to reverse an array
+
+import java.util.Arrays;
+
+class ArrayReversal {
+    public static void reverseArray(int[] arr) {
+        int start = 0;
+        int end = arr.length - 1;
+
+        while (start < end) {
+            // Swap elements at start and end indices
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+
+            // Move pointers towards center
+            start++;
+            end--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5};
+        System.out.println("Original Array: " + Arrays.toString(array));
+        
+        reverseArray(array);
+        System.out.println("Reversed Array: " + Arrays.toString(array));
+    }
+}
+
+Differences between C and Java:
+
+Feature	                         C	             Java
+Paradigm	              Procedural	       Object-oriented
+Pointers	          Supports pointers	     no direct pointer manipulation
+Inheritance	        No built-in inheritance	        Supports single inheritance
+Exception Handling	No built-in exception handling	Built-in exception handling
+
+Multi-threading in Java
+
+Multi-threading allows concurrent execution of two or more threads for maximum utilization of CPU. Java provides built-in support for multi-threading through
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+
+
+Java Exception Handling:
+
+Java provides a framework for handling runtime errors (exceptions) using 5 keywords
+
+try: Block of code to monitor for exceptions.
+catch: Block of code to handle exceptions.
+finally: Block of code that will execute after try/catch, regardless of whether an exception is thrown.
+throw: Used to explicitly throw an exception.
+throws: Indicates which exceptions a method can throw.
+
+public class SimpleExceptionHandlingExample {
+    public static void main(String[] args) {
+
+        // Example 1: Handling ArithmeticException
+
+       try {
+            int result = 10 / 0; // This will throw ArithmeticException
+        } 
+       catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+        }
+         finally {
+            System.out.println("This will always execute after the division             attempt");
+        }    }}
+
+
+Methods Used in Queues
+
+add, offer, remove, poll, element, and peek
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class QueueExample {
+    public static void main(String[] args) {
+        Queue<Integer> queue = new LinkedList<>();
+
+        // Adding elements to the queue
+        queue.add(1);
+        queue.offer(2);
+        queue.add(3);
+
+        // Displaying the queue
+        System.out.println("Queue: " + queue);
+
+        // Removing elements from the queue
+        int removed1 = queue.remove();
+        Integer removed2 = queue.poll();
+
+        // Displaying the removed elements
+        System.out.println("Removed element (remove): " + removed1);
+        System.out.println("Removed element (poll): " + removed2);
+
+        // Displaying the updated queue
+        System.out.println("Updated Queue: " + queue);
+
+        // Retrieving the element at the front of the queue
+        int front1 = queue.element();
+        Integer front2 = queue.peek();
+
+        // Displaying the front element
+        System.out.println("Front element (element): " + front1);
+        System.out.println("Front element (peek): " + front2);
+
+        // Displaying the final queue
+        System.out.println("Final Queue: " + queue);
+    }
+}
+
+Methods Used in stack give me in single code
+
+
+import java.util.Stack;
+
+public class StackExample {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+
+        // Pushing elements onto the stack
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        // Displaying the stack
+        System.out.println("Stack: " + stack);
+
+        // Popping elements from the stack
+        int popped1 = stack.pop();
+        Integer popped2 = stack.pop();
+
+        // Displaying the popped elements
+        System.out.println("Popped element (pop): " + popped1);
+        System.out.println("Popped element (pop): " + popped2);
+
+        // Displaying the updated stack
+        System.out.println("Updated Stack: " + stack);
+
+        // Peeking at the top element of the stack
+        int top1 = stack.peek();
+        Integer top2 = stack.peek();
+
+        // Displaying the top element
+        System.out.println("Top element (peek): " + top1);
+        System.out.println("Top element (peek): " + top2);
+
+        // Checking if the stack is empty
+        boolean isEmpty = stack.isEmpty();
+        System.out.println("Is stack empty? " + isEmpty);
+
+        // Searching for an element in the stack
+        int position = stack.search(2);
+        System.out.println("Position of element 2: " + position);
+    }
+}
+
+
+About Computer Networks - is HTTP stateful or stateless
+
+HTTP (Hypertext Transfer Protocol) is a stateless protocol. This means that each request from a client to a server is treated independently, without any knowledge of previous requests.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

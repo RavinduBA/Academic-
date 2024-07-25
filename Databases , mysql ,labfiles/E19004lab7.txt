@@ -1,0 +1,162 @@
+1. Create the Student Table and Populate It
+
+CREATE TABLE Student (
+    Registration_Number INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100),
+    GPA DECIMAL(3,2),
+    Convocation_Reg_Num INT,
+    Class VARCHAR(50)
+);
+
+-- Populate the table with sample data (assuming sample data is given)
+
+INSERT INTO Student (Name, GPA)
+VALUES
+('Sameera Perera', 3.8),
+('Chathura Silva', 3.5),
+('Lakmali Fernando', 3.2),
+('Sidath Wijesinghe', 2.9),
+('Nalin Gunawardena', 2.7);
+
+
+2. Create the Convocation Table
+
+CREATE TABLE Convocation (
+    Convocation_Reg_Num INT AUTO_INCREMENT PRIMARY KEY,
+    Last_Name VARCHAR(50),
+    Address VARCHAR(100),
+    Age INT,
+    Student_Reg_Num INT,
+    FOREIGN KEY (Student_Reg_Num) REFERENCES Student(Registration_Number)
+);
+
+
+3. Create a Stored Procedure for Registration
+
+DELIMITER //
+
+CREATE PROCEDURE RegisterForConvocation(
+    IN studentName VARCHAR(100),
+    IN lastName VARCHAR(50),
+    IN address VARCHAR(100),
+    IN age INT
+)
+BEGIN
+    DECLARE newConvocationRegNum INT;
+    
+    INSERT INTO Convocation (Last_Name, Address, Age, Student_Reg_Num)
+    SELECT lastName, address, age, Registration_Number
+    FROM Student
+    WHERE Name = studentName;
+    
+    SET newConvocationRegNum = LAST_INSERT_ID();
+    
+    UPDATE Student
+    SET Convocation_Reg_Num = newConvocationRegNum
+    WHERE Name = studentName;
+END //
+
+DELIMITER ;
+
+
+4. Perform Registration for Specific Students
+
+CALL RegisterForConvocation('Sameera Perera', 'Perera', '123 Main St', 22);
+CALL RegisterForConvocation('Chathura Silva', 'Silva', '456 Elm St', 23);
+CALL RegisterForConvocation('Lakmali Fernando', 'Fernando', '789 Oak St', 21);
+CALL RegisterForConvocation('Sidath Wijesinghe', 'Wijesinghe', '101 Pine St', 24);
+CALL RegisterForConvocation('Nalin Gunawardena', 'Gunawardena', '202 Maple St', 22);
+
+
+5. Create the Registered View
+
+CREATE VIEW Registered AS
+SELECT 
+    s.Name,
+    s.Registration_Number,
+    s.GPA,
+    c.Convocation_Reg_Num,
+    c.Address,
+    c.Age
+FROM Student s
+JOIN Convocation c ON s.Registration_Number = c.Student_Reg_Num;
+
+
+6. Create the NotRegistered View
+
+CREATE VIEW NotRegistered AS
+SELECT 
+    s.Name,
+    s.Registration_Number,
+    s.GPA,
+    NULL AS Convocation_Reg_Num,  -- Placeholder for Convocation Registration Number
+    NULL AS Address,              -- Placeholder for Address
+    NULL AS Age                   -- Placeholder for Age
+FROM Student s
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Convocation c
+    WHERE s.Registration_Number = c.Student_Reg_Num
+);
+
+
+7. Create the LateRegistration Table
+
+CREATE TABLE LateRegistration (
+    Convocation_Reg_Num INT AUTO_INCREMENT PRIMARY KEY,
+    Last_Name VARCHAR(50),
+    Address VARCHAR(100),
+    Age INT,
+    Student_Reg_Num INT,
+    FOREIGN KEY (Student_Reg_Num) REFERENCES Student(Registration_Number)
+);
+
+
+8. Write a Trigger for LateRegistration
+
+DELIMITER //
+
+CREATE TRIGGER AfterLateRegistration
+AFTER INSERT ON LateRegistration
+FOR EACH ROW
+BEGIN
+    UPDATE Student
+    SET Convocation_Reg_Num = NEW.Convocation_Reg_Num
+    WHERE Registration_Number = NEW.Student_Reg_Num;
+END //
+
+DELIMITER ;
+
+
+9. Perform Late Registrations
+
+INSERT INTO LateRegistration (Last_Name, Address, Age, Student_Reg_Num)
+VALUES
+('Kasun', '123 Main St', 23, 6),
+('Kalpa', '456 Elm St', 24, 7),
+('Kumudu', '789 Oak St', 22, 8),
+('Rohani', '101 Pine St', 21, 9),
+('Chithra', '202 Maple St', 23, 10);
+
+
+10. Create a Stored Procedure to Assign Class Based on GPA
+
+DELIMITER //
+
+CREATE PROCEDURE AssignClass()
+BEGIN
+    UPDATE Student
+    SET Class = CASE
+        WHEN GPA >= 3.7 THEN 'First class honors'
+        WHEN GPA = 3.3 THEN 'Second class honors-upper division'
+        WHEN GPA = 2.7 THEN 'Second class honors-lower division'
+        WHEN GPA = 2.0 THEN 'Third class honors'
+        ELSE 'No honors'
+    END;
+END //
+
+Call the Stored Procedure
+
+CALL AssignClass();
+
+

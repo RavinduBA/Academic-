@@ -1,0 +1,47 @@
+
+react
+diffence between useState and useEffect 
+what is react redux ? about it
+
+software 
+
+software testing
+software development life cycle
+
+
+java 
+
+Final, finally, and finalize keyword
+Exception handling 
+java threading
+rather than using if else condition what are the other things we can use but do the same things?
+
+not necessary - generics , strings , Java Module System , Programming Graphical User Interface (GUI), Java unit testing ,java concurrency and multithreading ,   in software construction module
+
+unit testing 
+
+algorithm and data structres
+
+at least one sorting algorithm presudo code (easy one bubble sort)
+Dynamic programming
+Hash tables ,trees, Graphs (Perusal)
+
+
+databases
+
+join operations 
+current MySQL version, software that runs it , MySQL quires
+How to optimize database / normalization / why we use normalization in databases
+What is differnce between relational and non realational databases
+
+watch the lab sheets (around 5 ) about MySQL indexing , query optimization and intro for mongodb
+
+
+AWS services 
+about iot 
+
+
+design patterns 
+
+Model View artiteture
+

@@ -1,0 +1,458 @@
+
+static keyword 
+
+static keyword is used to set methods/attributes to static 
+
+Static methods/varaibles are  belong to the class rather than any instance. 
+They can be called on the class itself without creating an instance.
+
+non static methods, variables only can be called on individual objects
+
+inside a static method we cant refer non static field (dosent make any sense) but you can acess static methods,varibles through a individual object.
+static keyword used when declaring constants .
+EX:  public static final int MAX_LIVES = 9;
+
+when to make something static or non static? 
+
+if the method or attribute  only make sense in individual object,instance of that class then it must be instance method or class. 
+if the method or attribute in class level or should be the same or a shared value among all of class its must be static .
+
+EX:
+public class Car {
+    public static int wheels = 4;  // Static variable
+    private String make;  // Instance variable
+    private String model;  // Instance variable
+
+    public Car(String make, String model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    public static void changeWheels(int newWheels) {  // Static method
+        wheels = newWheels;
+    }
+
+    public void displayInfo() {  // Instance method
+        System.out.println(make + " " + model + " with " + wheels + " wheels");
+    }
+}
+
+// Usage:
+public class Main {
+    public static void main(String[] args) {
+        Car car1 = new Car("Toyota", "Corolla");
+        Car car2 = new Car("Honda", "Civic");
+
+        car1.displayInfo();  // Output: Toyota Corolla with 4 wheels
+        car2.displayInfo();  // Output: Honda Civic with 4 wheels
+        
+        Car.wheels = 6;
+        Car.changeWheels(6);  // Changing static variable
+
+        car1.displayInfo();  // Output: Toyota Corolla with 6 wheels
+        car2.displayInfo();  // Output: Honda Civic with 6 wheels
+    }
+}
+
+
+Void keyword
+
+in Java, the void keyword is used in method does not return any value(maybe its prints the value), also we dont use void in constructors in oop.
+
+
+OOP and procedural programming difference 
+
+
+-- Focus on Objects and classes. But pp Focus on Functions and just variables
+-- we can reuse codes by concepts like  Inheritance and polymorphism. in pp in here also we can reuse but its can only done by Function calls.
+-- OOP is mostly need for a bit complex applications. but pp is Simpler and suitable for smaller tasks.
+-- normally methods in OOP has less parameters because of encapsulation but in pp have more parameters relative to OOP.
+-- OOP Provides clear structure and hides implementation details.
+-- in  pp there can be more interconnections between functions , so it can be a problem if we change a function or something hat but in OOP we don't have that problem 
+
+
+example for OOP
+
+so if we take a car as an object
+
+Class: Car
+Attributes: model , color, manufactured  year 
+Methods:  start(),stop(),Honk()
+
+// car class
+public class Car {
+    private String make;
+    private String model;
+    private int year;
+
+    // Constructor
+    public Car(String make, String model, int year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    // Method to display car information
+    public String displayInfo() {
+        return year + " " + make + " " + model;
+    }
+        return f"{self.year} {self.make} {self.model}"
+
+
+ // Create a Car object
+        Car car = new Car("Toyota", "Corolla", 2020);
+        
+        // Perform actions
+        car.start();
+        car.honk();
+        car.stop();
+
+
+Class: phone
+Attributes: battery life , color, display size  
+Methods:  make a call , take a photo 
+
+
+real world example
+
+every browser has local storage object , its allow to store data locally so its contains attributes like length , and methods like set item, get item .
+
+Class  = A class is a blueprint or template for creating objects
+Object = An object is an instance of a class. 
+
+ex: if phone is a class then huwaui phone , apple phone , samsuang phone are objects
+
+
+Access control modifiers 
+
+class,method,variables accessability and visibility is depend on Access Modifiers 
+♣ Public
+♣ Private
+♣ Protected
+♣ Default
+
+𝐏𝐮𝐛𝐥𝐢𝐜 - is Access Modifier is  Public then you can acesss to it from any package 
+
+𝐏𝐫𝐢𝐯𝐚𝐭𝐞 - if access modifier private then it can be only Access within class only (thats why we use getter and setter methods)
+
+𝐏𝐫𝐨𝐭𝐞𝐜𝐭𝐞𝐝 -  if access modifier protected then it can be only Access within the package or by  a subclass. 
+
+𝐃𝐞𝐟𝐚𝐮𝐥𝐭(𝐩𝐚𝐜𝐤𝐚𝐠𝐞-𝐩𝐫𝐢𝐯𝐚𝐭𝐞) - if you write a class or method without access modifier then its in deafult. if access modifier default then it can be only Access within package  only
+
+
+OOP concepts==
+
+--Encapsulation:
+
+so in OOP encapsulation is grouping related attributes and methods  that operate on data to a single unit called class.
+its also doing like information hiding using access control modifiers
+
+EX : Car class encapsulates properties like color, model, year and methods like start(), stop, honk
+
+class Car:
+    def __init__(self, make, model, year):
+        self.__make = make  # Private variable
+        self.__model = model  # Private variable
+        self.__year = year  # Private variable
+    
+    def display_info(self):
+        return f"{self.__year} {self.__make} {self.__model}"
+    
+    def set_make(self, make):
+        self.__make = make
+    
+    def get_make(self):
+        return self.__make
+
+--Abstraction:
+
+So abstraction in OOP is Hiding the complex implementational details and showing only the essential features of an object.so we can have much simpler interface. 
+abstraction can be implemnt using abstract class and by a interface
+Example: its like driving a car without knowing complex inner works like engine , transmission. we can simple drive it with steering wheel and padels
+
+Abstract class
+
+Abstract class is a clas that have one or more abstract methods. abstract method  is basically a method without body (no implemantation). we cant create objects directly using abstract class.so to use a abstract class we have to define a sub class and override the abstract methods in the superclasss.
+we use  "abstract " key to define the abstract class and abstract methods in it .and we use "extend " to define a subclass under .
+it purpose is to provide a common interface to subclasses.
+Use abstract classes when you have a clear hierarchical relationship and want to share code among related classes.
+
+
+abstract class Vehicle {
+    private String make;
+    private String model;
+
+    public Vehicle(String make, String model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    // Abstract method (no implementation here)
+    public abstract void startEngine();
+}
+
+class Car extends Vehicle {
+    public Car(String make, String model) {
+        super(make, model);
+    }
+
+    // Providing implementation for the abstract method
+    @Override
+    public void startEngine() {
+        System.out.println("The car's engine is starting");
+    }
+}
+
+class Motorcycle extends Vehicle {
+    public Motorcycle(String make, String model) {
+        super(make, model);
+    }
+
+    // Providing implementation for the abstract method
+    @Override
+    public void startEngine() {
+        System.out.println("The motorcycle's engine is starting");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car("Toyota", "Corolla");
+        Vehicle motorcycle = new Motorcycle("Honda", "CBR500R");
+
+        car.startEngine(); // Outputs: The car's engine is starting
+        motorcycle.startEngine(); // Outputs: The motorcycle's engine is starting
+
+        System.out.println(car.getMake() + " " + car.getModel()); // Outputs: Toyota Corolla
+        System.out.println(motorcycle.getMake() + " " + motorcycle.getModel()); // Outputs: Honda CBR500R
+    }
+}
+
+Method overloading and overriding ( @override and overloading )
+
+overloading - Method overloading happens when multiple methods in the same class have the same name but different parameters (different type, number, or both).
+              constructuers also can be overlaod.
+overriding  - Method overriding happens when a subclass provides a implementation for a method that is already defined in its superclass.
+
+EX:class Animal {
+    public void makeSound() {
+        System.out.println("Some generic animal sound");
+    }}
+class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }}
+class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow");
+    }}
+
+interface
+
+So in interface there can be no common methods ,only the abstract methods(methods without a implemntation). we cant create object using a interface . 
+we use "interface " keyword. and we use "implements " to define a subclass under it
+- interfaces can have default methods. This feature was introduced in Java 8
+- Use   interfaces  when  you  want  to  define  capabilities  that  can  be  shared  across  unrelated classes.
+
+
+--Composition:
+
+composition is relationship between two classes where one class contains instance of another class as a variable. 
+EX : vehicle class can take a variable called engine so that is actually instance of engine class
+
+// Engine class
+public class Engine {
+    private String type;
+    
+    public Engine(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void start() {
+        System.out.println("Engine of type " + type + " is starting...");
+    }}
+
+// Car class
+public class Car {
+    private String make;
+    private String model;
+    private Engine engine; // Composition: Car "has-a" Engine
+    
+    public Car(String make, String model, Engine engine) {
+        this.make = make;
+        this.model = model;
+        this.engine = engine;
+    }
+
+    public void displayInfo() {
+        System.out.println("Car make: " + make);
+        System.out.println("Car model: " + model);
+        System.out.println("Engine type: " + engine.getType());
+    }
+
+    public void startCar() {
+        System.out.println("Starting car...");
+        engine.start(); // Delegating the start action to the engine
+    }}
+
+public class Main {
+    public static void main(String[] args) {
+        Engine myEngine = new Engine("V8");
+        Car myCar = new Car("Ford", "Mustang", myEngine);
+        
+        myCar.displayInfo();
+        myCar.startCar();
+    }}
+
+
+--Inheritance:
+
+Relationship between two classes where one class(subclass) inherits all the methods and attributes of another class.(superclass)
+so this helps in creating natural hierarchy and increase the code reusability 
+
+EX : electric car class inherits from Car class, gaining its attributes and methods.
+EX: its like man inherits features from his father and the  grandfather
+EX : 
+public class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void eat() {
+        System.out.println(name + " is eating");
+    }
+
+    public void sleep() {
+        System.out.println(name + " is sleeping");
+    }
+}
+public class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+
+    public void bark() {
+        System.out.println(name + " is barking");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Dog myDog = new Dog("Buddy");
+
+        myDog.eat();   // Inherited from Animal
+        myDog.sleep(); // Inherited from Animal
+        myDog.bark();  // Specific to Dog
+    }}
+
+
+Single Inheritance      : One subclass, one superclass.
+Multilevel Inheritance  : A chain of inheritance where a class inherits from another class, which in turn inherits from another class.
+Hierarchical Inheritance: One superclass, multiple subclasses.
+Multiple Inheritance    : One subclass, multiple superclasses. (Java supports this through interfaces).
+Hybrid Inheritance      : A mix of two or more types of inheritance. (Java supports this through interfaces).
+
+
+--Polymorphism: (poly = many morphism= forms)
+
+Polymorphism lets objects of different classes to be treat as objects of a common superclass. its like providing same interface for different structures.
+EX : Both car and bike classes can be treat as instance of vehicle class . Both classes have a start() method but perform differently.
+EX : Shape superclass and rectangle , triangle sub classes
+
+two types of polymorphism -  compile time and runtime polymorphism 
+
+
+these are used in inheritance and polymorphism =======
+in here we use "extends"  to define subclass, "@Override" for over ride a method and "super" keyword to refer superclass
+
+
+upcasting and downcasting 
+
+These are concepts related to inheritance and polymorphism. upcasting and downcasting in OOP are forms of type casting, 
+
+General Type Casting -
+General type casting is like  converting a value from one primitive type to another.
+such as from an int to a float, or from a char to an int. This can be explicit or implicit.
+
+EX:
+int num = 10;
+double doubleNum = num;            // Implicit casting (widening conversion)
+int anotherNum = (int) doubleNum; // Explicit casting (narrowing conversion)
+
+Upcasting 
+Upcasting is casting a subclass object to a superclass type. 
+It is safe and usually implicit.
+EX : Circle c1 = new Cylinder(1.1, 25) 
+
+Downcasting
+Downcasting is casting a superclass object to a subclass type. 
+It is explicit and can be unsafe if not done correctly.
+EX:  Circle c1 = new Cylinder(2,22)
+     Cylinder cy1 = (Cylinder)c1
+
+
+solid principles
+
+SOLID principles are a set of design principles in OOP that help create more understandable, flexible, and maintainable software. 
+
+SOLID stands for:
+
+Single Responsibility Principle (SRP):
+
+- A class should have only one job or responsibility.
+Example: A class handling user authentication should not be responsible for logging or data validation.
+
+Open/Closed Principle (OCP):
+
+- Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+- This means we should be able to add new featueres to a class without changing its existing code.
+
+Example: by inheritance ,Instead of modifying an existing class to add new features, we can extend it by creating a new subclass.
+        (Interfaces and Abstract Classes) Define interfaces or abstract classes and implement them in different ways to add new behavior.
+
+Liskov Substitution Principle (LSP):
+
+- objects of a parent class can be replaced with objects of a child class without breaking the code. 
+Example: If class B is a subclass of class A, objects of class A should be replaceable with objects of class B without affecting the functionality.
+
+Interface Segregation Principle (ISP):
+
+- Clients should not be forced to depend on interfaces they do not use. 
+- Instead of one large interface, it’s better to have multiple small, specific interfaces.
+Example: Instead of having a single interface for all animal behaviors, create separate interfaces for different behaviors like IFlyable, ISwimmable, and IRunnable.
+
+Dependency Inversion Principle (DIP):
+
+- High-level modules should not depend on low-level modules. Both should depend on abstractions. Also, abstractions should not depend on details. Details should depend on abstractions.
+ - Instead of a high-level module directly instantiating a low-level class, both should depend on an interface or an abstract class.
+
+- High-Level Modules: modules that contain complex logic and drive the overall functionality of the application. They are usually more abstract and represent business rules or policies.
+
+- Low-Level Modules: handle detailed operations like interacting with databases, file systems, or performing specific calculations. They are often more concrete and closer to the hardware or the specific implementation details.
+
+- Abstractions: These are interfaces or abstract classes that define the contract for the interaction between high-level and low-level modules.
+
+Adhering to these principles helps in developing software that is easier to maintain, test, and extend.
+
+
+
+
+
+
+
+

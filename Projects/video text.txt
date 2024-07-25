@@ -1,0 +1,81 @@
+this is the web application of event attendece system first i tell about the conference room page 
+so event organizer can create a conference room b clicking this button after that it 
+
+
+
+so as you can see i used  React's useState to manage state variables such as conferenceData, modal, roomName, and conferenceIds.
+then i did like Modal Management to create new conference room using a toggleModal function.
+and also i used API Calls to Post new conference room data to the server.
+and then of course i created custom components like  Sidebar, Footer like things so i can use them in any page
+
+so next look at the croom component
+so as you cann see this is bit lengthy so i tell about the main parts i did  
+in here also i used the useState to manage state varibles.
+and also useEffect hooks ensure that necessary data is fetched and stored in the component  when the component is first rendered
+so as you can see for every button i created a specific function and for like every function i used exception handling.
+i was assigned for frontend parts so i get some help from my backeend friend to  Handling CRUD operations and api calls like wise things
+
+
+Overiviiw page
+
+in here also i used the REACThooks and DATA fetching through apis and addition to that me and my backend friend had to focus on rendring realtime components. and here also i used child components like ConfernceRoom cards like wise thigns
+
+
+attendees page
+
+i used react-data-table-component For displaying tabular data as data tables.
+
+Data Fetching using axios  for making GET requests to fetch attendee data, conference IDs, and timestamps for attendees.
+
+Contatct us 
+
+in the contact us page i used a service call emailJS to send emails to our email account easily
+
+Login 
+
+i created handleLogin function to sends a login request to the API.
+and useNavigate: From react-router to navigate programmatically.
+useState: For managing the email and password state.
+
+so these are the main things i did on this project beside that i creatd user registration part also i did the whole styling of the web application 
+
+
+
+Movie review application
+
+
+So fiest i show the database of this application first for the time being i creted two collections movies and reviews but as i tell before this is a ongoing one so i will add some other collections like user details, ratings in future..
+
+lets move on to backend part of the  application so i used  spring boot 
+so first i create two classes for the movie and review entity
+this clases map to the collection in mongodb .  
+so as you can see i use shortcuts to create constructors, getter,setters . and also use Genrics for some attributes.
+so the same thing in the review class 
+
+then i created interface called Movie repository by extending Mongorepositry class by that i can have crud operation methods in mongorepositry class 
+
+
+so then the Movie service class contains the business logic of application .It interacts with the MovieRepository to fetch movie data from the database.
+
+then the MovieController class handles the HTTP Requests related to movies. so its maps request to api/v1/movies endpoint . so you can see it contains several methods like getallmovies , getsinglemovie like things 
+
+then thee review part actually for review part also its the same structure as the movie part 
+so lets move on after implemtning these things on backend i test the api calls by postman sql 
+
+
+
+
+so in here app.js  
+
+i used  axios for API requests and react-router-dom for routing. It fetches and displays a list of movies, individual movie details, and reviews using useState for state management and useEffect for fetching data on component mount. The app includes routes for the homepage, movie trailers, reviews, and a 404 NotFound page.
+
+The Hero component displays a movie slide bar  using carousel. Each movie card shows the movie's poster, title, and buttons to play the trailer and view reviews. It uses useNavigate from react-router-dom for navigation to the reviews page and bootstrap for styled buttons.
+
+and this part is for making  HTTP requests to the relevant API . code.
+
+The `Reviews` component fetches and displays reviews for a specific movie using `useEffect` to load data on mount. Reviews can be added using a form managed with `useRef` . When a new review is submitted, it is posted to the API and the local state is updated to include the new review. The component displays the movie poster, a form for submitting new reviews, and a list of existing reviews.
+
+
+
+
+

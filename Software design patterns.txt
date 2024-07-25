@@ -1,0 +1,221 @@
+SAAS (Software as a Service)
+
+- SaaS is a cloud computing model where software applications are delivered over the internet as a service.
+- Instead of purchasing, installing, and maintaining software, users access it via a web browser, typically through a subscription model.
+
+Key Characteristics:
+
+Hosted on Remote Servers:
+Accessible via Internet:
+Subscription-Based:
+Automatic Updates
+Scalability
+
+Examples of SaaS:
+
+Google Workspace: Includes Gmail, Google Drive, Docs, Sheets, Slides
+Coursera , udemy
+
+
+Software development life cycle
+
+1.Planing
+2.Requirement Analysis
+3.Design
+4.Implementation(Coding)
+5.Testing
+6.Deployment
+7.Maintenance
+
+1. Planning
+: define the project scope and purpose, identify resources, and create a project plan.
+
+2. Requirements Analysis
+: Gather and analyze the business and technical requirements for the software.
+
+3. Design
+: Create a blueprint for the software application that meets the specified requirements
+
+4. Implementation (Coding)
+: Transform the design documents into the actual software application by coding.
+
+5.Testing
+: to Verify that the software works as intended and is free of defects.
+
+6. Deployment
+: Make the software available for use.
+
+7. Maintenance
+: Correct issues discovered in the production environment and enhance the application as needed. 
+
+SDLC Models  
+
+There are several models used to structure the SDLC process
+1.Waterfall Model
+2.Iterative Model
+3.V-Model
+4.Spiral Model
+5.Agile Model.
+
+Waterfall Model
+
+- In waterfall model each phase in SDLC must be completed before the next phase begins.
+- So its a linear and sequential approach to software development.
+- its suitable to use if Requirements are well understood and unlikely to change, The 
+  project is short-term and simple.
+
+Pros: 1.Simplicity
+      2.documentation is created at each phase, ensuring clarity.
+
+Cons: 1.Testing is performed after the coding phase so it can discover issues late in the process.
+
+Agile Model
+
+- Agile model is an iterative way to software development.
+- It focuses on flexibility, customer collaboration, and delivering small functional parts of the software frequently.
+
+Popular Agile Frameworks: Scrum, Kanban, Extreme Programming (XP)
+
+Pros: 1.Easily adapts to changing requirements and priorities.
+      2.Frequent releases of small, functional increments allow for Early and Continuous Delivery
+      3.Customer Satisfaction
+
+
+
+Design Patterns
+
+- design patterns are reusable solutions to common problems in software design.
+- Its a description or template for how to solve problem and can  be used in many different situations. 
+- 23 design patterns
+
+3 categories =   1. Creational patterns
+                 2. Structural patterns
+                 3. Behavioral patterns
+Software Design Pattern එකක් කියන්නෙ මොකක්ද කිව්වොත් අපිට නැවත නැවත පැන නගින විවිද පොදු Problems වලට තියෙන Reusable විසදුමක්.සරලවම කියනවනම් ප්‍රශ්නවලට විසදුමක්.ඒවගේම ඒවා Template එකක් වගේ අපිට පාවිච්චි කරන්න පුලුවන්.හැබැයි මේක කෝඩ් එකක් නෙමෙයි නිකන් අපේ ප්‍රශ්නේ තියෙන තැනට දාලා හදාගන්න.මේක Thinking Process එකක්.එහෙම නැතුව Library එකක් විදිහට දකින්න එපා.මේ විදිහට පැනනගින software design ප්‍රශ්න නවත්තගන්න වගේම එන ප්‍රශ්න ඉක්මනින් Effective විදිහට විසදගන්නත් මේවා Best Practices විදිහට කාලයක් තිස්සේ Software Industry එක විසින්ම ඉදිරියට අරන් ආපු දේවල් ටිකක්
+
+1.Creational patterns
+
+- so creational patterns concerned about the way of creating objects.
+- factory pattern , abstract factory pattern, singleton patter , prototype pattern , builder 
+
+2.Structural patterns
+
+- so structural design patterns concerned about how classes and objects are implement  form large structures (using inheritance and polymorphism like things)
+-its simplifies the structure by identifying the relationships.
+-adapter pattern , bridge pattern , composite pattern , flyweight pattern, proxy pattern
+
+3.Behaviuorl pattern 
+
+- behavioral patterns concern about communication and responsibilities of objects.
+-  observer pattern ,strategy pattern .
+
+
+singleton pattern
+
+- Ensures a class has only one insrtance and provides a global point of acesss to it
+- creational design pattern
+
+Common Uses
+
+Configuration Management: To ensure that all parts of an application use the same configuration settings.
+Logging: To maintain a single point of logging that can be used throughout an application.
+
+Factory Method Pattern:
+
+- its provide interface for creating object in superclass but allows subclass to change the type of objects that created .
+- creational design pattern
+
+Ex: so we use this pattern in our baby devlopment mobile app so in user registration part i created base classs called User and under that created sub classes like Doctor ,MidWife , Baby by extending with inheritence . so ommon attributes and methods (like name and id) are shared among these classes. 
+
+
+observer design pattern
+
+- its a behavioiral design pattern
+- observer design pattern establish one to many dependencey between objects.
+- so that when one object changes state, all its dependents are notified and updated automatically.
+
+EX: 
+ we used it to manage notifications for upcoming vaccinations or growth monitoring alerts. When a baby’s data is updated, any observers (e.g., parents, doctors, midwives) are notified of changes.
+
+Common Uses
+Event Handling Systems:   GUI frameworks often use the Observer pattern to handle events like button clicks or text changes.
+MVC (Model-View-Controller):  The pattern is used to synchronize views with the underlying data model.
+Notification Systems:  Used in applications that need to notify users of certain events or changes.
+
+Composite design pattern
+ 
+- Composite design pattern that allows you to compose objects into tree structures to represent part-whole hierarchies. This pattern lets clients treat individual objects and compositions of objects uniformly.
+- structural design pattern
+
+Common Uses
+File Systems: A file system where files and directories are treated uniformly.
+Graphic Systems: GUI components like windows, panels, and buttons can be composed together.
+Hierarchical Structures: Organizational hierarchies or any tree-like structures.
+
+
+
+MVC (model view controller pattern )
+
+model view controller pattern is architectural pattern for designing software applications .
+its separate application into 3 parts = Model ,View ,Controller
+
+Controller = 
+- Acts as an intermediary between the Model and the View.
+- It handles user input , interacts with the Model to fetch or update data,then updates the View accordingly. 
+- interactions between model and view only can be done through controller
+
+Model = 
+- model mainly works with  the application's data and the business logic
+-  it do things like geting,storing data from the database, Performing data operations (e.g., insert, update, delete).
+
+View = 
+- Represents the user interface of the application.
+- Presenting the data in a specific format (e.g., HTML, JSON) .
+
+
+EX : Scenario: Web Application Requesting a Web Page
+
+1.The user enters a URL in their browser to request a web page, such as http://example.com/home.
+
+2.The web server receives the HTTP request and forwards it to the  controller based on the URL routing configuration.
+
+3.The controller gets the request, decides which data is needed, and interacts with the Model to retrieve that data.
+
+4.The model queries the database or other data sources to fetch the necessary data (e.g., user details, articles, etc.).
+
+5.The controller takes the data by the model and passes it to the appropriate view template.
+
+6.The view uses the data to render an HTML page and sends it back to the user's browser.
+
+
+show how you used MVC pattern in one of your project?
+
+advantages 
+
+1. MVC sepreate the application into 3 parts so it divide the resposnbilites more organized way
+2. we can do Parallel Development MVC: Different developers can work on the Model, View, and Controller simultaneously without causing conflicts.
+3. Improves Reusability and Scalability: Components can be reused in different parts of the application or even in different projects 
+4. imporves testability : Because MVC is seprated to parts its easy to test each compnent sepreatly. 
+
+
+disadvantages
+
+1. MVC pattern can make the codebase more complex
+2. MVC pattern can introduce additnol overhead to the system .
+ (overhead" refers to the additional resources and complexity introduced by implementing this architectural pattern. like extra code)
+
+uses of MVC pattern
+
+1.MVC is commonly used in Web application development 
+(  model represnts the data stored in databse , and view genrates the HTML and UI , and conrtroller handels user requests and update the model ,view)
+
+2.MVC is in dekstop apllications also Mobile apllications
+
+
+
+
+
+
+
+
+
