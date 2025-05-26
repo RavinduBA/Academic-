@@ -1,0 +1,76 @@
+✅ How Vercel + GitHub Integration Works
+
+When you connect a Vercel project to a GitHub repo:
+
+Automatic Deployments on Push:
+Vercel automatically deploys your app every time you push or merge changes to the connected branch (e.g., main or master).
+This includes fixes, new features, or even small typo commits.
+
+First Deploy Fails Due to Config Error:
+If your initial deploy fails due to a misconfiguration (like a wrong build command or missing dependency), Vercel doesn’t stop watching your repo.
+When you fix the issue in code and push the change, Vercel automatically tries again, thinking: “Oh, a new commit! Let me deploy the latest version.”
+
+No Manual Confirmation Needed:
+Once connected, Vercel doesn’t require your permission for future deployments — it assumes you want the latest version deployed automatically.
+
+🔒 How to Control This Behavior
+
+If you'd like more control over when deployments happen:
+Use a separate “development” branch for work and only merge to main when you're ready.
+Or go to Vercel Dashboard > Project Settings > Git > Production Branch and set it to a stable branch (e.g., release) so main doesn't auto-deploy.
+
+🚨 Bonus Tip
+
+To stop auto-deployment temporarily:
+
+Pause the Git integration in the Settings > Git tab of your project.
+Or set up Preview Deployments only, and promote to Production manually when ready.
+
+
+
+
+
+How CI/CD Works in Vercel
+
+In Vercel's case:
+
+Continuous Integration (CI):
+Every time you push code to GitHub (or GitLab/Bitbucket), Vercel runs a build and checks if your code compiles and passes basic checks.
+
+Continuous Deployment (CD):
+If the build is successful, Vercel automatically deploys the result to a live environment — either a Preview Deployment or Production Deployment, depending on the branch.
+
+So yes, CI/CD is built-in and automatic with Vercel once it's connected to your Git repo.
+
+
+🔄 Is the branching strategy common outside of Vercel?
+
+Absolutely. This is a standard Git workflow used in many CI/CD pipelines across platforms like:
+
+    GitHub Actions
+
+    GitLab CI/CD
+
+    CircleCI
+
+    Jenkins
+
+    Netlify
+
+    AWS Amplify
+
+    Azure DevOps
+
+    and more...
+
+Here’s a breakdown of common workflows:
+🔀 Common Branching Strategy (used everywhere)
+Branch	        Purpose
+main or master	Always production-ready. Deployed to live environments.
+dev or develop	Work-in-progress branch where features are integrated.
+feature/xyz	Short-lived branches for specific features or fixes.
+release/x.y.z	Optional: Prepares for a new version, tested before merging to main.
+hotfix/xyz	Critical fix branches directly off main.
+
+
+
