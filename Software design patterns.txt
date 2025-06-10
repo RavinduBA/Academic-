@@ -14,7 +14,7 @@ Scalability
 Examples of SaaS:
 
 Google Workspace: Includes Gmail, Google Drive, Docs, Sheets, Slides
-Coursera , udemy
+Coursera , Udemy
 
 
 Software development life cycle
